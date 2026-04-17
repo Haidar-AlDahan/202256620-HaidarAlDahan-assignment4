@@ -1,14 +1,8 @@
-# SWE363 – Portfolio Assignment 2
+# SWE363 – Portfolio Assignment 3
 
-This project is a responsive personal portfolio website developed for SWE363 (Web Engineering).
-
-The purpose of this assignment is to demonstrate:
-
-- HTML structure and semantic layout
-- Responsive design using CSS
-- JavaScript interactivity
-- Client-side data handling
-- Clear user experience and documentation
+This project is a responsive personal portfolio website developed for SWE363 (Web Engineering).  
+Assignment 3 builds on Assignments 1 and 2 by adding advanced functionality, API integration,
+and performance improvements.
 
 ---
 
@@ -37,6 +31,28 @@ The purpose of this assignment is to demonstrate:
 - **Data Persistence**
   - Selected filter and search input are saved using localStorage
   - State is restored automatically after page refresh
+
+---
+
+### Assignment 3 Features (New)
+
+- **GitHub API Integration**
+  - Fetches and displays public repositories live from GitHub
+  - Shows repo name, description, language, and star count
+  - Includes a direct link to each repository
+  - Displays a friendly error message if the API fails
+
+- **Project Sorting**
+  - Sort projects by name A–Z or Z–A
+  - Works alongside existing filter and search
+
+- **Visitor Timer**
+  - Displays how long the visitor has been on the page
+  - Updates every second in the footer
+
+- **Debounced Search**
+  - Search input waits 300ms after typing stops before running
+  - Reduces unnecessary function calls for better performance
 
 ---
 
@@ -78,10 +94,27 @@ The website will run locally in your browser.
 
 ## How to Use the Website
 
-- Use the filter buttons to view specific categories
-- Use the search box to find projects by name or keyword
-- Filtering and search can be combined
-- Your last selected filter and search will be remembered after refresh
+- Use filter buttons to view projects by category
+- Use the sort dropdown to sort projects by name
+- Use the search box to find projects by keyword
+- All three controls work together simultaneously
+- Your last filter and search are remembered after refresh
+
+### GitHub Repositories Section
+
+- Loads automatically from the GitHub API
+- Shows your 6 most recently updated public repositories
+
+### Theme Toggle
+
+- Click the theme button to switch between light and dark mode
+- Preference is saved automatically
+
+### Contact Form
+
+- Enter name, email, and message
+- Errors shown live as you type
+- Status message appears after submission
 
 ### Navigation
 
@@ -109,28 +142,31 @@ The website will run locally in your browser.
 ## Technologies Used
 
 - HTML5
-- CSS3 (Flexbox, Grid, responsive design)
-- JavaScript (DOM manipulation, event handling, localStorage)
+- HTML5
+- CSS3 (Flexbox, Grid, CSS Variables, responsive design)
+- JavaScript (DOM manipulation, Fetch API, localStorage, debouncing)
+- GitHub REST API (public, no authentication required)
 
 ---
 
 ## AI Usage Summary
 
-AI tools (such as ChatGPT) were used to:
+AI tools (ChatGPT, Claude) were used to:
 
-- Assist in debugging and improving code structure
-- Refine UI/UX decisions
-- Improve documentation clarity
+- Assist in implementing GitHub API integration
+- Help add sort functionality and visitor timer
+- Apply performance improvements (debouncing)
+- Refine documentation
 
-All code was reviewed, tested, and modified manually to ensure correctness.
-
-(See `docs/ai-usage-report.md` for full details)
+All code was reviewed, tested, and modified manually.  
+See `docs/ai-usage-report.md` for full details.
 
 ---
 
 ## Notes
 
-- This is a front-end only project (no backend)
-- Form submission is simulated and does not send data
+- Front-end only project (no backend)
+- Form submission is simulated and does not send real data
+- GitHub API section requires an internet connection
 
 ---
