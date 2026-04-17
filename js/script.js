@@ -180,6 +180,7 @@ if (form) {
 // =========================
 const FILTER_KEY = "projectFilter";
 const SEARCH_KEY = "projectSearch";
+const SORT_KEY = "projectSort";
 const filterButtons = document.querySelectorAll(".filter-btn");
 const projectCards = document.querySelectorAll(".project-card");
 const searchInput = document.getElementById("projectSearch");
@@ -190,30 +191,51 @@ let currentSort = "default";
 // Apply filtering + search
 function updateProjects() {
   const searchValue = searchInput.value.toLowerCase().trim();
+  const grid = document.getElementById("projects-grid");
+
+  // Get all cards as an array so we can sort them
+  let cards = Array.from(projectCards);
+
+  // Sort first
+  if (currentSort === "az") {
+    cards.sort(function (a, b) {
+      return a
+        .getAttribute("data-title")
+        .localeCompare(b.getAttribute("data-title"));
+    });
+  } else if (currentSort === "za") {
+    cards.sort(function (a, b) {
+      return b
+        .getAttribute("data-title")
+        .localeCompare(a.getAttribute("data-title"));
+    });
+  }
+
+  // Re-append in sorted order
+  cards.forEach(function (card) {
+    grid.appendChild(card);
+  });
+
+  // Now filter + search
   let visibleCount = 0;
 
-  projectCards.forEach((card) => {
+  cards.forEach((card) => {
     const category = card.getAttribute("data-category");
     const title = card.getAttribute("data-title");
 
     const matchesFilter = currentFilter === "all" || category === currentFilter;
-
     const matchesSearch = title.includes(searchValue);
 
     if (matchesFilter && matchesSearch) {
       card.style.display = "block";
-
-      // trigger fade-in
       requestAnimationFrame(() => {
         card.classList.remove("is-hidden");
         card.classList.add("visible");
       });
-
       visibleCount++;
     } else {
       card.classList.remove("visible");
       card.classList.add("is-hidden");
-
       setTimeout(() => {
         if (card.classList.contains("is-hidden")) {
           card.style.display = "none";
@@ -236,7 +258,6 @@ function updateProjects() {
     statusText.textContent = "Showing all projects.";
   }
 }
-
 // Handle filter buttons
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -251,16 +272,38 @@ filterButtons.forEach((btn) => {
     updateProjects();
   });
 });
-// Handle search input
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    localStorage.setItem(SEARCH_KEY, searchInput.value);
+
+// Handle sort dropdown
+const sortSelect = document.getElementById("sortSelect");
+if (sortSelect) {
+  sortSelect.addEventListener("change", function () {
+    currentSort = sortSelect.value;
+    localStorage.setItem(SORT_KEY, currentSort);
     updateProjects();
   });
+}
+// Handle search input
+function debounce(fn, delay) {
+  let timer;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(fn, delay);
+  };
+}
+
+if (searchInput) {
+  searchInput.addEventListener(
+    "input",
+    debounce(function () {
+      localStorage.setItem(SEARCH_KEY, searchInput.value);
+      updateProjects();
+    }, 300),
+  );
 }
 // Restore saved state
 const savedFilter = localStorage.getItem(FILTER_KEY);
 const savedSearch = localStorage.getItem(SEARCH_KEY);
+const savedSort = localStorage.getItem(SORT_KEY);
 
 // Restore filter
 if (savedFilter) {
@@ -277,6 +320,12 @@ if (savedFilter) {
 // Restore search
 if (savedSearch && searchInput) {
   searchInput.value = savedSearch;
+}
+
+// Restore sort
+if (savedSort && sortSelect) {
+  currentSort = savedSort;
+  sortSelect.value = savedSort;
 }
 
 // Initial fade-in on page load
@@ -351,3 +400,28 @@ function loadGitHubRepos() {
 }
 
 loadGitHubRepos();
+// =========================
+// Visitor Timer
+// =========================
+(function () {
+  const timerEl = document.getElementById("visitTimer");
+  if (!timerEl) return;
+
+  let seconds = 0;
+
+  setInterval(function () {
+    seconds++;
+
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    if (hrs > 0) {
+      timerEl.textContent = hrs + "h " + mins + "m " + secs + "s";
+    } else if (mins > 0) {
+      timerEl.textContent = mins + "m " + secs + "s";
+    } else {
+      timerEl.textContent = secs + "s";
+    }
+  }, 1000);
+})();
