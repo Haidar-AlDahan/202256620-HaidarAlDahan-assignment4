@@ -186,7 +186,7 @@ const searchInput = document.getElementById("projectSearch");
 const statusText = document.getElementById("projectsStatus");
 
 let currentFilter = "all";
-
+let currentSort = "default";
 // Apply filtering + search
 function updateProjects() {
   const searchValue = searchInput.value.toLowerCase().trim();
@@ -285,3 +285,69 @@ projectCards.forEach((card) => {
 });
 
 updateProjects();
+
+// =========================
+// GitHub API Integration
+// =========================
+
+function loadGitHubRepos() {
+  const grid = document.getElementById("github-grid");
+  const statusEl = document.getElementById("github-status");
+  const username = "zFiora";
+
+  fetch(
+    "https://api.github.com/users/" +
+      username +
+      "/repos?sort=updated&per_page=6",
+  )
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("GitHub API request failed");
+      }
+      return response.json();
+    })
+    .then(function (repos) {
+      // Remove loading text
+      if (statusEl) statusEl.remove();
+
+      if (repos.length === 0) {
+        grid.innerHTML = "<p class='muted'>No public repositories found.</p>";
+        return;
+      }
+
+      repos.forEach(function (repo) {
+        const card = document.createElement("article");
+        card.className = "card card-body github-card";
+
+        card.innerHTML =
+          "<h3>" +
+          repo.name +
+          "</h3>" +
+          "<p>" +
+          (repo.description || "No description provided.") +
+          "</p>" +
+          "<div class='github-meta'>" +
+          "<span class='tag'>" +
+          (repo.language || "N/A") +
+          "</span>" +
+          "<span>⭐ " +
+          repo.stargazers_count +
+          "</span>" +
+          "</div>" +
+          "<a class='btn primary' href='" +
+          repo.html_url +
+          "' target='_blank' rel='noopener'>View on GitHub</a>";
+
+        grid.appendChild(card);
+      });
+    })
+    .catch(function (error) {
+      if (statusEl) {
+        statusEl.textContent =
+          "Could not load repositories. Please try again later.";
+      }
+      console.error("GitHub API error:", error);
+    });
+}
+
+loadGitHubRepos();

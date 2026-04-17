@@ -562,3 +562,39 @@ textarea:focus {
 .projects-status {
   margin-top: 0.5rem;
 }
+
+/* =========================
+   GitHub Repos
+========================= */
+.github-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.github-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.github-card p {
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+}
+
+.github-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
