@@ -29,8 +29,6 @@ The goal of this assignment is to deliver a comprehensive personal web applicati
 - **Dark / Light theme toggle** — saved using `localStorage`
 - **Mobile navigation menu** — toggle button on small screens
 - **Project filtering** — filter by All, Mobile, or Web category
-- **Project search** — live keyword search with debouncing (300ms)
-- **Project sorting** — sort A–Z or Z–A by project name
 - **Data persistence** — filter, search, and theme restored after refresh
 - **Contact form validation** — real-time inline errors
 
@@ -38,6 +36,8 @@ The goal of this assignment is to deliver a comprehensive personal web applicati
 - **GitHub API integration** — live repos fetched from GitHub REST API
 - **Visitor timer** — tracks and displays time spent on the page
 - **Debounced search** — optimized input handling for performance
+- **Project search** — live keyword search with debouncing (300ms)
+- **Project sorting** — sort A–Z or Z–A by project name
 
 ### Final Polish (Assignment 4)
 - **Real email delivery** — contact form sends actual emails via EmailJS (no backend required)
