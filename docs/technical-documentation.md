@@ -1,4 +1,4 @@
-# Technical Documentation – Assignment 3
+# Technical Documentation – Assignment 4
 
 ## Overview
 
@@ -144,22 +144,38 @@ The project follows a clear separation of concerns:
 
 ---
 
+### 13. Scroll-triggered animations (Innovation)
+
+- IntersectionObserver API used to animate sections on scroll
+- No external libraries required
+
+### 14. Typing animation (Innovation)
+
+- Dynamic role cycling in the hero section
+- Custom typewriter effect built in vanilla JS
+
+### 15. Back-to-top button (Innovation)
+
+- Appears dynamically after scrolling 400px
+- Smooth scroll back to top
+
 ## API Details
 
-| Property        | Value                                              |
-|-----------------|----------------------------------------------------|
-| API Name        | GitHub REST API                                    |
-| Endpoint        | /users/{username}/repos                            |
-| Method          | GET                                                |
-| Authentication  | None (public)                                      |
-| Data Returned   | Repo name, description, language, stars, URL       |
-| Error Handling  | User-friendly message displayed on failure         |
+| Property       | Value                                        |
+| -------------- | -------------------------------------------- |
+| API Name       | GitHub REST API                              |
+| Endpoint       | /users/{username}/repos                      |
+| Method         | GET                                          |
+| Authentication | None (public)                                |
+| Data Returned  | Repo name, description, language, stars, URL |
+| Error Handling | User-friendly message displayed on failure   |
 
 ---
 
 ## Compatibility
 
 Tested on:
+
 - Google Chrome
 - Brave
 

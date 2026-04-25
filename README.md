@@ -1,172 +1,159 @@
-# SWE363 – Portfolio Assignment 3
+# SWE363 – Portfolio Assignment 4
 
-This project is a responsive personal portfolio website developed for SWE363 (Web Engineering).  
-Assignment 3 builds on Assignments 1 and 2 by adding advanced functionality, API integration,
-and performance improvements.
+**Live Demo:** https://haidar-aldahan.github.io/202256620-HaidarAlDahan-assignment4/
+
+This is the final and complete version of my personal portfolio web application, developed for SWE363 (Web Engineering) at KFUPM. It brings together all skills learned across assignments 1–4 into a polished, fully deployed, and production-ready portfolio.
+
+---
+
+## Objective
+
+The goal of this assignment is to deliver a comprehensive personal web application that demonstrates mastery of all course concepts, including responsive design, JavaScript interactivity, API integration, real email functionality, performance optimization, and professional deployment.
 
 ---
 
 ## Features
 
-- Responsive layout (desktop, tablet, mobile)
-- Mobile navigation menu (toggle button on small screens)
-- Dark / Light theme toggle (saved using localStorage)
-- Contact form with validation and user feedback
-- Smooth hover effects and UI transitions
+### Core (Assignment 1)
+- Semantic HTML5 structure with accessibility support (skip link, ARIA labels)
+- Responsive layout for desktop, tablet, and mobile
+- Hero section with profile image, tagline, and call-to-action buttons
+- About, Skills, Projects, GitHub Repos, and Contact sections
+- Sticky header with blur effect
 
-### Interactive Features (Assignment 2)
+### Interactive (Assignment 2)
+- **Dark / Light theme toggle** — saved using `localStorage`
+- **Mobile navigation menu** — toggle button on small screens
+- **Project filtering** — filter by All, Mobile, or Web category
+- **Project search** — live keyword search with debouncing (300ms)
+- **Project sorting** — sort A–Z or Z–A by project name
+- **Data persistence** — filter, search, and theme restored after refresh
+- **Contact form validation** — real-time inline errors
 
-- **Project Filtering**
-  - Filter projects by category (All, Mobile, Web)
-  - Updates instantly without page reload
+### Advanced (Assignment 3)
+- **GitHub API integration** — live repos fetched from GitHub REST API
+- **Visitor timer** — tracks and displays time spent on the page
+- **Debounced search** — optimized input handling for performance
 
-- **Project Search**
-  - Search projects using keywords
-  - Results update live as the user types
-
-- **User Feedback**
-  - Displays number of results
-  - Shows message when no projects are found
-
-- **Data Persistence**
-  - Selected filter and search input are saved using localStorage
-  - State is restored automatically after page refresh
+### Final Polish (Assignment 4)
+- **Real email delivery** — contact form sends actual emails via EmailJS (no backend required)
+- **Scroll animations** — sections animate in using IntersectionObserver API
+- **Typing animation** — hero tagline cycles through roles with a typewriter effect
+- **Back-to-top button** — appears after scrolling, smooth scroll back to top
+- **Fully deployed** — live on GitHub Pages
 
 ---
 
-### Assignment 3 Features (New)
+## Live Deployment
 
-- **GitHub API Integration**
-  - Fetches and displays public repositories live from GitHub
-  - Shows repo name, description, language, and star count
-  - Includes a direct link to each repository
-  - Displays a friendly error message if the API fails
+🔗 **https://haidar-aldahan.github.io/202256620-HaidarAlDahan-assignment4/**
 
-- **Project Sorting**
-  - Sort projects by name A–Z or Z–A
-  - Works alongside existing filter and search
-
-- **Visitor Timer**
-  - Displays how long the visitor has been on the page
-  - Updates every second in the footer
-
-- **Debounced Search**
-  - Search input waits 300ms after typing stops before running
-  - Reduces unnecessary function calls for better performance
+Deployed via GitHub Pages. No build step required — fully static.
 
 ---
 
 ## Project Structure
 
+```
+202256620-HaidarAlDahan-assignment4/
 ├── index.html
-
-├── css/styles.css
-
-├── js/script.js
-
-├── assets/images/
-
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   └── images/
 ├── docs/
-│ ├── ai-usage-report.md
-│ └── technical-documentation.md
-
-└── README.md
+│   ├── ai-usage-report.md
+│   └── technical-documentation.md
+├── presentation/
+│   ├── slides.pdf
+│   └── demo-video.mp4
+├── README.md
+└── .gitignore
+```
 
 ---
 
-## How to Run the Project
+## How to Run Locally
 
-This project does not require any installation or dependencies.
+This project has no dependencies or build tools required.
 
-### Steps:
-
-1. Download or clone the repository
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Haidar-AlDahan/202256620-HaidarAlDahan-assignment4.git
+   ```
 2. Open the project folder
-3. Double-click `index.html`  
-   OR  
-   Right-click → Open with browser
-   OR
-   Write in the termenal of the project `start index.html`
+3. Double-click `index.html` — or run in terminal:
+   ```bash
+   start index.html      # Windows
+   open index.html       # macOS
+   ```
 
-The website will run locally in your browser.
+The website will run instantly in your browser.
 
 ---
 
 ## How to Use the Website
 
-- Use filter buttons to view projects by category
-- Use the sort dropdown to sort projects by name
-- Use the search box to find projects by keyword
-- All three controls work together simultaneously
-- Your last filter and search are remembered after refresh
-
-### GitHub Repositories Section
-
-- Loads automatically from the GitHub API
-- Shows your 6 most recently updated public repositories
-
-### Theme Toggle
-
-- Click the theme button to switch between light and dark mode
-- Preference is saved automatically
-
-### Contact Form
-
-- Enter name, email, and message
-- Errors shown live as you type
-- Status message appears after submission
-
 ### Navigation
-
-- Use the navigation bar at the top to move between sections
-- On small screens, click the **Menu button** to open navigation links
+- Use the top navbar to jump between sections
+- On mobile, tap **Menu** to open navigation links
 
 ### Theme Toggle
-
-- Click the **theme toggle button** to switch between light and dark mode
+- Click the **theme button** (top right) to switch between dark and light mode
 - Your preference is saved automatically
 
 ### Projects Section
+- Use **filter buttons** to view All, Mobile, or Web projects
+- Use the **sort dropdown** to sort A–Z or Z–A
+- Use the **search box** to find projects by keyword
+- All three controls work together simultaneously
+- State is remembered after page refresh
 
-- Browse project cards
-- Click buttons to view more details or demos
+### GitHub Repositories
+- Loads automatically from the GitHub API
+- Shows 6 most recently updated public repositories
 
 ### Contact Form
-
-- Enter your name, email, and message
-- Errors will be shown if inputs are invalid
-- A status message will appear after submission
+- Fill in name, email, and message
+- Errors are shown live as you type
+- On submit, a real email is delivered to the site owner via EmailJS
 
 ---
 
 ## Technologies Used
 
-- HTML5
-- HTML5
-- CSS3 (Flexbox, Grid, CSS Variables, responsive design)
-- JavaScript (DOM manipulation, Fetch API, localStorage, debouncing)
-- GitHub REST API (public, no authentication required)
+| Technology | Purpose |
+|---|---|
+| HTML5 | Semantic structure and accessibility |
+| CSS3 | Flexbox, Grid, variables, animations, responsive design |
+| JavaScript (Vanilla) | DOM manipulation, events, API calls, localStorage |
+| GitHub REST API | Live repository display |
+| EmailJS | Real contact form email delivery |
+| GitHub Pages | Free static site deployment |
 
 ---
 
 ## AI Usage Summary
 
-AI tools (ChatGPT, Claude) were used to:
+AI tools (Claude, ChatGPT) were used to assist with:
 
-- Assist in implementing GitHub API integration
-- Help add sort functionality and visitor timer
-- Apply performance improvements (debouncing)
-- Refine documentation
+- Implementing GitHub API integration
+- Adding EmailJS contact form integration
+- Scroll animations using IntersectionObserver
+- Typing animation in the hero section
+- Debouncing and performance optimization
+- Refining documentation
 
-All code was reviewed, tested, and modified manually.  
+All AI-generated code was reviewed, tested, and manually modified before use.
 See `docs/ai-usage-report.md` for full details.
 
 ---
 
 ## Notes
 
-- Front-end only project (no backend)
-- Form submission is simulated and does not send real data
-- GitHub API section requires an internet connection
-
----
+- Front-end only — no backend server required
+- Contact form delivers real emails via EmailJS (free tier: 200 emails/month)
+- GitHub API section requires an active internet connection
+- Tested on Chrome, Brave — responsive verified via DevTools

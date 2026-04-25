@@ -622,3 +622,37 @@ textarea:focus {
   border-color: rgba(37, 99, 235, 0.65);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
 }
+.fade-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  z-index: 999;
+}
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}

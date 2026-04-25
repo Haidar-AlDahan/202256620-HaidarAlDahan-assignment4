@@ -419,3 +419,66 @@ loadGitHubRepos();
     }
   }, 1000);
 })();
+// =========================
+// Scroll animations
+// =========================
+const observer = new IntersectionObserver(
+  function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.1 },
+);
+
+document.querySelectorAll(".section").forEach(function (section) {
+  section.classList.add("fade-section");
+  observer.observe(section);
+});
+// =========================
+// Typing animation
+// =========================
+const roles = ["Software Engineer", "Flutter Developer", "Web Developer"];
+const typingEl = document.querySelector(".tagline");
+if (typingEl) {
+  let roleIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function type() {
+    const current = roles[roleIndex];
+    if (!deleting) {
+      typingEl.textContent = current.slice(0, charIndex++);
+      if (charIndex > current.length) {
+        deleting = true;
+        setTimeout(type, 1500);
+        return;
+      }
+    } else {
+      typingEl.textContent = current.slice(0, charIndex--);
+      if (charIndex < 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+    }
+    setTimeout(type, deleting ? 50 : 100);
+  }
+  type();
+}
+// =========================
+// Back to top button
+// =========================
+const backToTop = document.createElement("button");
+backToTop.textContent = "↑";
+backToTop.className = "back-to-top";
+document.body.appendChild(backToTop);
+
+window.addEventListener("scroll", function () {
+  backToTop.classList.toggle("show", window.scrollY > 400);
+});
+
+backToTop.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
