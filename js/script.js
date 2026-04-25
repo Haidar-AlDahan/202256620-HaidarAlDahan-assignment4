@@ -78,9 +78,11 @@ if (navToggle && navLinks) {
     }
   });
 }
+
 // =========================
-// Contact form validation (no backend)
+// Contact form — EmailJS
 // =========================
+emailjs.init("YWVenq0e9_hWkC7p3");
 
 const form = document.getElementById("contactForm");
 if (form) {
@@ -88,23 +90,15 @@ if (form) {
 
   function setError(fieldName, message) {
     const errorEl = form.querySelector('[data-error-for="' + fieldName + '"]');
-    if (errorEl) {
-      errorEl.textContent = message;
-    }
+    if (errorEl) errorEl.textContent = message;
   }
 
   function validateForm() {
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const messageInput = document.getElementById("message");
-
-    const name = nameInput ? nameInput.value.trim() : "";
-    const email = emailInput ? emailInput.value.trim() : "";
-    const message = messageInput ? messageInput.value.trim() : "";
-
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
     let valid = true;
 
-    // Name
     if (name.length < 2) {
       setError("name", "Please enter your name (at least 2 characters).");
       valid = false;
@@ -112,16 +106,13 @@ if (form) {
       setError("name", "");
     }
 
-    // Email (simple check)
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!emailValid) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("email", "Please enter a valid email.");
       valid = false;
     } else {
       setError("email", "");
     }
 
-    // Message
     if (message.length < 10) {
       setError("message", "Message should be at least 10 characters.");
       valid = false;
@@ -132,33 +123,17 @@ if (form) {
     return valid;
   }
 
-  // Live validation while typing
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const messageInput = document.getElementById("message");
+  // Live validation
+  ["name", "email", "message"].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el)
+      el.addEventListener("input", function () {
+        if (status) status.textContent = "";
+        validateForm();
+      });
+  });
 
-  if (nameInput) {
-    nameInput.addEventListener("input", function () {
-      if (status) status.textContent = "";
-      validateForm();
-    });
-  }
-
-  if (emailInput) {
-    emailInput.addEventListener("input", function () {
-      if (status) status.textContent = "";
-      validateForm();
-    });
-  }
-
-  if (messageInput) {
-    messageInput.addEventListener("input", function () {
-      if (status) status.textContent = "";
-      validateForm();
-    });
-  }
-
-  // On submit
+  // Submit
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -167,12 +142,31 @@ if (form) {
       return;
     }
 
-    form.reset();
-    setError("name", "");
-    setError("email", "");
-    setError("message", "");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+    if (status) status.textContent = "Sending...";
 
-    if (status) status.textContent = "Message ready (no backend connected).";
+    emailjs
+      .send("service_9jnub3f", "template_x6424ze", {
+        from_name: document.getElementById("name").value.trim(),
+        from_email: document.getElementById("email").value.trim(),
+        message: document.getElementById("message").value.trim(),
+      })
+      .then(function () {
+        form.reset();
+        setError("name", "");
+        setError("email", "");
+        setError("message", "");
+        if (status)
+          status.textContent = "Message sent! I'll get back to you soon.";
+        if (submitBtn) submitBtn.disabled = false;
+      })
+      .catch(function (error) {
+        console.error("EmailJS error:", error);
+        if (status)
+          status.textContent = "Something went wrong. Please try again.";
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 }
 // =========================
